@@ -1,0 +1,16 @@
+.message {
+  font-size: 14px;
+  font-weight: bold;
+  color: red;
+}
+
+button.clear {
+  background: none;
+  border: none;
+  font-style: italic;
+  margin: 10px;
+  &:hover {
+    color: blue;
+    text-decoration: underline;
+  }
+}

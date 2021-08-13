@@ -1,0 +1,86 @@
+<form [formGroup]="loanCalculatorForm" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label for="monthlyIncome"> Monthly Income </label>
+    <input formControlName="monthlyIncome" (keypress)="_keyPress($event)" type="text" id="monthlyIncome" >
+    
+    <div *ngIf="monthlyIncome.errors && (monthlyIncome.dirty || monthlyIncome.touched)" [ngClass] = "'error'"> 
+			<div *ngIf="monthlyIncome.errors?.required">
+				Monthly Income required.
+			</div>  
+			<div *ngIf="monthlyIncome.errors.min">
+				Monthly Income should be minimum 500000.
+			</div>
+      <div *ngIf="monthlyIncome.errors.pattern">
+				Monthly Income not valid.
+			</div> 
+		</div>
+
+  </div>
+  <div class="form-group">
+    <label for="requestedAmount"> Requested Amount </label>
+    <input type="text" formControlName="requestedAmount" (keypress)="_keyPress($event)" />
+    <div *ngIf="requestedAmount.errors && (requestedAmount.dirty || requestedAmount.touched)" [ngClass] = "'error'"> 
+			<div *ngIf="requestedAmount.errors?.required">
+				Requested Amount required.
+			</div>
+			<div *ngIf="requestedAmount.errors.min">
+				Requested Amount should be minimum 20000000.
+			</div>
+      <div *ngIf="requestedAmount.errors.pattern">
+				Requested Amount not valid.
+			</div> 
+		</div>
+  </div>
+  <div class="form-group">
+    <label for="loanTerm"> Loan Term(in months) </label>
+    <input type="text" formControlName="loanTerm" (keypress)="_keyPress($event)"/>
+    
+    <div *ngIf="loanTerm.errors && (loanTerm.dirty || loanTerm.touched)" [ngClass] = "'error'"> 
+			<div *ngIf="loanTerm.errors?.required">
+				Loan Term required.
+			</div>
+			<div *ngIf="loanTerm.errors.min">
+				Loan Term should be 36 months or more.
+			</div> 
+      <div *ngIf="loanTerm.errors.max">
+				Loan Term should be less than 360 months.
+			</div> 
+      <div *ngIf="loanTerm.errors.pattern">
+				Loan Term not valid.
+			</div> 
+		</div>
+
+  </div>
+  <div class="form-group">
+    <label for="selectedChildren">Children</label>
+    <select name="selectedChildren" formControlName="selectedChildren" >
+      <option value="">--Choose an option--</option>
+      <option value="NONE">NONE</option>
+      <option value="SINGLE">SINGLE</option>
+      <option value="MULTIPLE">MULTIPLE</option>
+    </select>
+    <div *ngIf="selectedChildren.errors && (selectedChildren.dirty || selectedChildren.touched)" [ngClass] = "'error'"> 
+			<div *ngIf="selectedChildren.errors?.required">
+				Please select Children.
+			</div>
+		</div>
+  </div>
+  <div class="form-group">
+    <label for="coApplicant">Co-applicant</label>
+    <select name="coApplicant" formControlName="coApplicant" >
+      <option value="">--Choose an option--</option>
+      <option value="NONE">NONE</option>
+      <option value="SINGLE_BORROWER">SINGLE_BORROWER</option>
+      <option value="MULTIPLE_BORROWERS">MULTIPLE_BORROWERS</option>
+    </select>
+    <div *ngIf="coApplicant.errors && (coApplicant.dirty || coApplicant.touched)" [ngClass] = "'error'"> 
+			<div *ngIf="coApplicant.errors?.required">
+				Please select Co-applicant.
+			</div>
+		</div>
+  </div>
+  <button type="submit" [disabled]="!loanCalculatorForm.valid">Submit</button>
+</form>
+<p *ngIf="isValidFormSubmitted" [ngClass] = "'success'">
+    Form submitted successfully with Monthly Income-{{loanCalculatorForm.value.monthlyIncome}} and Term of {{loanCalculatorForm.value.loanTerm}} months
+</p>
