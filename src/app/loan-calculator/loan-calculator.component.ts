@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { LoanCalculator } from '../loanCalculator';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { LoanCalculatorService } from '../config/loanCalculator.service';
 
